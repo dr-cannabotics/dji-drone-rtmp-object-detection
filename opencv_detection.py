@@ -20,7 +20,7 @@ model.setInputMean((127.5, 127.5, 127.5))
 model.setInputSwapRB(True)
 
 # Open RTMP stream
-cap = cv2.VideoCapture('rtmp://<your-laptop-IP>:1935/live')
+cap = cv2.VideoCapture('rtmp://127.0.0.1:1935/live')
 if not cap.isOpened():
     print("Error: Could not open video stream.")
     exit()
