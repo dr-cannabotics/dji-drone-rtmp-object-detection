@@ -53,7 +53,7 @@ dji-drone-rtmp-object-detection/
 ### Step 2: Stream Video Feed
 1. **Connect DJI Goggles 2** to the drone and smartphone.
 2. **Install DJI Fly app** on the smartphone to display the video feed.
-3. **Use Larix Broadcaster** to stream the feed to the RTMP server:
+3. **Use DJI Fly app** to stream the feed to the RTMP server:
    - **URL**: `rtmp://127.0.0.1:1935/live`
    - **Stream Key**: Leave empty or use a custom key.
 4. **Start Streaming** from the DJI Fly app.
