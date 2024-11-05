@@ -66,7 +66,7 @@ dji-drone-rtmp-object-detection/
 2. **Download Model Files** and place them in the project directory.
 3. **Update RTMP Stream URL** in `opencv_detection.py`:
    ```python
-   cap = cv2.VideoCapture('rtmp://<your-laptop-IP>:1935/live')
+   cap = cv2.VideoCapture('rtmp://127.0.0.1:1935/live')
    ```
 4. **Run the Python Script**:
    ```bash
@@ -93,15 +93,6 @@ Real-time detection of objects (e.g., people, cars) with bounding boxes and labe
 
 ## Contributing
 Contributions are welcome! Fork the repository and submit pull requests.
-
-## License
-This project is licensed under the MIT License.
-
-## Acknowledgments
-- OpenCV for computer vision.
-- Node-Media-Server for RTMP streaming.
-- Larix Broadcaster for mobile streaming.
-- DJI for their innovative technologies.
 
 ---
 
