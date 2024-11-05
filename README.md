@@ -1,207 +1,110 @@
-# Real-Time Object Detection from DJI Mini 3 Pro with DJI Goggles 2, RTMP Streaming, and OpenCV
-
-This project enables real-time object detection on a DJI Mini 3 Pro drone video feed, using **DJI Goggles 2**, **DJI Fly App**, **RTMP streaming**, and **OpenCV**. The setup involves streaming the video feed from **DJI Goggles 2** (connected to the drone) via a smartphone using the DJI Fly app, sending it to an **RTMP server**, and processing the stream with OpenCV for object detection.
+Here's a more compact and structured version of your project description on real-time object detection using the DJI Mini 3 Pro, DJI Goggles 2, RTMP streaming, and OpenCV. I've reduced redundancy and streamlined the content for clarity.
 
 ---
+
+# Real-Time Object Detection with DJI Mini 3 Pro
+
+This project enables real-time object detection on a video feed from the DJI Mini 3 Pro drone using **DJI Goggles 2**, **RTMP streaming**, and **OpenCV**. The setup streams the video from the DJI Goggles 2 to a Node.js RTMP server, where it is processed with OpenCV for object detection.
 
 ## Project Overview
 
-### Key Components:
-1. **DJI Mini 3 Pro & DJI Goggles 2**: The drone captures and displays the video feed through the **DJI Goggles 2** connected to it.
-2. **Smartphone**: The smartphone is connected to the **DJI Goggles 2** via USB-C and uses the **DJI Fly App** to stream the video feed to an **RTMP server**.
-3. **Node.js RTMP Server**: The RTMP server hosted on the laptop receives the live video stream from the smartphone and relays it for processing.
-4. **Python OpenCV Script**: The Python script on the laptop connects to the RTMP server to analyze the video feed in real time using object detection models.
-
-This system can be used for various applications like monitoring, analysis, and tracking through a drone's real-time video feed.
-
----
+### Key Components
+1. **DJI Mini 3 Pro & DJI Goggles 2**: Capture and display the video feed.
+2. **Smartphone**: Connects to DJI Goggles 2 and uses the **DJI Fly app** to stream video to an RTMP server.
+3. **Node.js RTMP Server**: Hosted on a laptop to receive and relay the video stream.
+4. **OpenCV Script**: Analyzes the video feed in real-time for object detection.
 
 ## Prerequisites
-
-Before setting up the project, ensure you have the following:
-
-- **DJI Mini 3 Pro** and **DJI Goggles 2**
-- **Smartphone** (for connecting to DJI Goggles 2 and running the DJI Fly app)
-- **Laptop** with:
-  - **Node.js** installed (for running the RTMP server)
-  - **Python** and **OpenCV** installed (for object detection)
-- **Network Connection**: Ensure that both the smartphone and laptop are connected to the same Wi-Fi network for RTMP streaming.
-
----
+- **Hardware**: DJI Mini 3 Pro, DJI Goggles 2, and a compatible smartphone.
+- **Software**: Laptop with Node.js, Python, and OpenCV installed.
+- **Network**: Ensure both smartphone and laptop are on the same Wi-Fi network.
 
 ## Project Structure
-
 ```
 dji-drone-rtmp-object-detection/
-├── server.js               # RTMP server configuration (Node.js)
-├── opencv_detection.py     # Python script for real-time object detection
-├── ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt  # Model config file
-├── frozen_inference_graph.pb                    # Object detection model
+├── server.js               # RTMP server configuration
+├── opencv_detection.py     # Object detection script
+├── ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt  # Model config
+├── frozen_inference_graph.pb                    # Detection model
 ├── labels.txt             # COCO class labels
-└── README.md              # Project documentation
+└── README.md              # Documentation
 ```
-
----
 
 ## Setup Instructions
 
-### Step 1: Install Node.js and Set Up Node.js RTMP Server on the Laptop
-
-1. **Install Node.js**:
-   - **Windows**:
-     - Download the Node.js installer from the [official website](https://nodejs.org/en/download/).
-     - Run the installer and follow the setup wizard to install Node.js.
-   - **macOS**:
-     - You can use Homebrew to install Node.js. Open a terminal and run:
-       ```bash
-       brew install node
-       ```
-   - **Linux**:
-     - For Debian-based systems (like Ubuntu), you can run:
-       ```bash
-       sudo apt update
-       sudo apt install nodejs npm
-       ```
-     - For RPM-based systems (like CentOS), you can run:
-       ```bash
-       sudo yum install nodejs npm
-       ```
-
-2. **Verify the installation**:
-   After installation, verify that Node.js and npm (Node Package Manager) are installed by running:
+### Step 1: Install Node.js and Set Up RTMP Server
+1. **Install Node.js** (follow platform-specific instructions).
+2. **Verify Installation**:
    ```bash
    node -v
    npm -v
    ```
-
-3. **Clone the repository and install dependencies**:
-
+3. **Clone Repository and Install Dependencies**:
    ```bash
    git clone https://github.com/dr-cannabotics/dji-drone-rtmp-object-detection/
    cd dji-drone-rtmp-object-detection
    npm install node-media-server
    ```
-
-4. **Configure the RTMP server**:
-
-   The `server.js` file configures an RTMP server using `node-media-server` to receive the video stream. The server will listen for incoming streams on port `1935`.
-
-5. **Run the RTMP server**:
-
-   In the project directory, start the RTMP server by running the following command:
-
+4. **Configure and Run RTMP Server**:
+   Edit `server.js` to set the server settings, then run:
    ```bash
    node server.js
    ```
+   The server will listen on `rtmp://<your-laptop-IP>:1935/live`.
 
-   The server will now be listening for RTMP streams on `rtmp://<your-laptop-IP>:1935/live`.
-
-### Step 2: Stream Video Feed from DJI Goggles 2 to RTMP Server
-
-1. **Connect DJI Goggles 2 to the DJI Mini 3 Pro**.
-
-2. **Connect the DJI Goggles 2 to your smartphone** using a USB-C cable.
-
-3. **Install the DJI Fly app** on your smartphone, and configure it to display the video feed from the drone on the DJI Goggles 2.
-
-4. **Install Larix Broadcaster (or another RTMP broadcasting app)** on your smartphone, and use it to stream the video feed from the DJI Fly app to the RTMP server.
-
-5. **Configure Larix Broadcaster**:
+### Step 2: Stream Video Feed
+1. **Connect DJI Goggles 2** to the drone and smartphone.
+2. **Install DJI Fly app** on the smartphone to display the video feed.
+3. **Use Larix Broadcaster** to stream the feed to the RTMP server:
    - **URL**: `rtmp://<your-laptop-IP>:1935/live`
    - **Stream Key**: Leave empty or use a custom key.
-   
-6. **Start streaming** the video feed from the DJI Fly app to the RTMP server on your laptop.
+4. **Start Streaming** from the DJI Fly app.
 
 ### Step 3: Set Up OpenCV for Object Detection
-
-1. **Install Python dependencies**:
-
-   If not already installed, set up a Python environment and install the required libraries:
-
+1. **Install Python Dependencies**:
    ```bash
    pip install opencv-python
    ```
-
-2. **Download Model Files**:
-
-   Download the following files and place them in the project directory:
-   - `ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt` (model configuration)
-   - `frozen_inference_graph.pb` (pre-trained object detection model)
-   - `labels.txt` (COCO class labels)
-
-3. **Configure the Python script**:
-
-   In `opencv_detection.py`, update the RTMP stream URL to reflect the IP address of your laptop:
-
+2. **Download Model Files** and place them in the project directory.
+3. **Update RTMP Stream URL** in `opencv_detection.py`:
    ```python
    cap = cv2.VideoCapture('rtmp://<your-laptop-IP>:1935/live')
    ```
-
-4. **Run the Python script** to start the object detection:
-
+4. **Run the Python Script**:
    ```bash
    python opencv_detection.py
    ```
 
-   The script will connect to the RTMP stream, perform real-time object detection on each frame, and display the results with bounding boxes and labels for detected objects.
-
----
-
 ## Usage
-
-1. **Start the RTMP server**: Run `node server.js` on your laptop to start the RTMP server.
-2. **Stream from DJI Goggles 2**: Use the DJI Fly app on the smartphone to display the drone’s feed and stream it via Larix Broadcaster to the RTMP server on your laptop.
-3. **Run the OpenCV script**: Execute the Python script `opencv_detection.py` to view real-time object detection on the live video stream.
-
-The detection results will be displayed with bounding boxes and labels for each detected object. Press `q` to stop the OpenCV window.
-
----
+1. Start the RTMP server: `node server.js`.
+2. Stream from DJI Goggles 2 using the DJI Fly app and Larix Broadcaster.
+3. Run the OpenCV script to view real-time object detection results.
 
 ## Example Output
-
-After setting up the system, you will see real-time detection of objects like people, cars, and animals from the video feed. The Python script uses the **SSD MobileNet V3 model** pre-trained on the **COCO dataset**. Detected objects are highlighted with bounding boxes, and the object class labels are shown on the video stream.
-
----
+Real-time detection of objects (e.g., people, cars) with bounding boxes and labels using the **SSD MobileNet V3** model.
 
 ## Notes
-
-- **Network Connection**: Make sure that the **smartphone and laptop** are on the same local network for seamless RTMP streaming.
-- **Latency**: The video feed may have some latency depending on the network speed, and you can optimize the RTMP settings (e.g., buffer size) to reduce lag.
-- **Model Accuracy**: You can fine-tune the object detection model or use other models for specific use cases.
-
----
+- Ensure both devices are on the same local network.
+- Adjust RTMP settings for latency and performance.
+- Modify detection confidence thresholds in `opencv_detection.py` if necessary.
 
 ## Troubleshooting
-
-- **Error: Could not open video stream**: Ensure the RTMP server is running, and the correct RTMP URL is configured in Larix Broadcaster on the smartphone.
-- **High latency**: Consider lowering the RTMP server's chunk size or increasing Wi-Fi bandwidth.
-- **Low detection accuracy**: You can adjust the confidence threshold for object detection in `opencv_detection.py` by modifying:
-
-   ```python
-   classIndex, confidence, bbox = model.detect(frame, confThreshold=0.65)
-   ```
-
----
+- **Video Stream Issues**: Verify the RTMP server is running and the URL is correct.
+- **Latency**: Optimize RTMP settings or network conditions.
+- **Detection Accuracy**: Fine-tune confidence thresholds in the detection script.
 
 ## Contributing
-
-Feel free to fork this repository and submit pull requests with improvements or enhancements. Contributions are welcome!
+Contributions are welcome! Fork the repository and submit pull requests.
 
 ## License
-
 This project is licensed under the MIT License.
 
----
-
-### Acknowledgments
-
-- **OpenCV** for computer vision and image processing.
-- **Node-Media-Server** for RTMP stream handling.
-- **Larix Broadcaster** for RTMP streaming from mobile devices.
-- **DJI** for providing powerful drone and goggle technologies.
+## Acknowledgments
+- OpenCV for computer vision.
+- Node-Media-Server for RTMP streaming.
+- Larix Broadcaster for mobile streaming.
+- DJI for their innovative technologies.
 
 ---
 
-Happy coding and drone flying! 🎉
-
----
+Happy coding and flying! 🎉
