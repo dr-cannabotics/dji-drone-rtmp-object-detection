@@ -45,21 +45,48 @@ dji-drone-rtmp-object-detection/
 
 ## Setup Instructions
 
-### Step 1: Set Up Node.js RTMP Server on the Laptop
+### Step 1: Install Node.js and Set Up Node.js RTMP Server on the Laptop
 
-1. **Clone the repository and install dependencies**:
+1. **Install Node.js**:
+   - **Windows**:
+     - Download the Node.js installer from the [official website](https://nodejs.org/en/download/).
+     - Run the installer and follow the setup wizard to install Node.js.
+   - **macOS**:
+     - You can use Homebrew to install Node.js. Open a terminal and run:
+       ```bash
+       brew install node
+       ```
+   - **Linux**:
+     - For Debian-based systems (like Ubuntu), you can run:
+       ```bash
+       sudo apt update
+       sudo apt install nodejs npm
+       ```
+     - For RPM-based systems (like CentOS), you can run:
+       ```bash
+       sudo yum install nodejs npm
+       ```
+
+2. **Verify the installation**:
+   After installation, verify that Node.js and npm (Node Package Manager) are installed by running:
+   ```bash
+   node -v
+   npm -v
+   ```
+
+3. **Clone the repository and install dependencies**:
 
    ```bash
    git clone https://github.com/dr-cannabotics/dji-drone-rtmp-object-detection/
    cd dji-drone-rtmp-object-detection
-   npm install
+   npm install node-media-server
    ```
 
-2. **Configure the RTMP server**:
+4. **Configure the RTMP server**:
 
    The `server.js` file configures an RTMP server using `node-media-server` to receive the video stream. The server will listen for incoming streams on port `1935`.
 
-3. **Run the RTMP server**:
+5. **Run the RTMP server**:
 
    In the project directory, start the RTMP server by running the following command:
 
@@ -77,7 +104,7 @@ dji-drone-rtmp-object-detection/
 
 3. **Install the DJI Fly app** on your smartphone, and configure it to display the video feed from the drone on the DJI Goggles 2.
 
-4. **Install Larix Broadcaster (or another RTMP broadcasting app)** on your smartphone, and use it to stream the video feed from DJI Fly app to the RTMP server.
+4. **Install Larix Broadcaster (or another RTMP broadcasting app)** on your smartphone, and use it to stream the video feed from the DJI Fly app to the RTMP server.
 
 5. **Configure Larix Broadcaster**:
    - **URL**: `rtmp://<your-laptop-IP>:1935/live`
@@ -178,5 +205,3 @@ This project is licensed under the MIT License.
 Happy coding and drone flying! 🎉
 
 ---
-
-This GitHub project setup provides a clear and concise explanation of how to use DJI hardware, RTMP streaming, and OpenCV to perform real-time object detection on a live drone video feed.
