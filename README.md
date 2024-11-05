@@ -75,8 +75,8 @@ dji-drone-rtmp-object-detection/
 
 ## Usage
 1. Start the RTMP server: `node server.js`.
-2. Stream from DJI Goggles 2 using the DJI Fly app and Larix Broadcaster.
-3. Run the OpenCV script to view real-time object detection results.
+2. Stream from DJI Goggles 2 using the DJI Fly app to RTMP server.
+3. Run the OpenCV script to view real-time object detection results from the RTMP live stream server.
 
 ## Example Output
 Real-time detection of objects (e.g., people, cars) with bounding boxes and labels using the **SSD MobileNet V3** model.
