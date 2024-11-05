@@ -73,6 +73,19 @@ dji-drone-rtmp-object-detection/
    python opencv_detection.py
    ```
 
+## Training the Object Detection Model
+
+If you wish to train or fine-tune the object detection model for custom objects:
+
+    Prepare the Dataset: Label images with tools like LabelImg and convert annotations into TFRecord format.
+    Fine-tune a Pre-trained Model: Use a pre-trained model like SSD MobileNet V3 and fine-tune it with TensorFlow on your custom dataset.
+    Training Steps:
+        Download and set up the TensorFlow Object Detection API.
+        Convert the dataset into TFRecord format.
+        Fine-tune the model using a pre-trained checkpoint and configure it with your dataset.
+        Export the trained model once training is complete.
+    Inference with OpenCV: After training, use the new model in opencv_detection.py for real-time object detection.
+
 ## Usage
 1. Start the RTMP server: `node server.js`.
 2. Stream from DJI Goggles 2 using the DJI Fly app to RTMP server.
