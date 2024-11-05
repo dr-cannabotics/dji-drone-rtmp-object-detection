@@ -1,5 +1,3 @@
-Here's a more compact and structured version of your project description on real-time object detection using the DJI Mini 3 Pro, DJI Goggles 2, RTMP streaming, and OpenCV. I've reduced redundancy and streamlined the content for clarity.
-
 ---
 
 # Real-Time Object Detection with DJI Mini 3 Pro
