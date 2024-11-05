@@ -50,7 +50,7 @@ dji-drone-rtmp-object-detection/
 1. **Clone the repository and install dependencies**:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/dr-cannabotics/dji-drone-rtmp-object-detection/tree/main
    cd dji-drone-rtmp-object-detection
    npm install
    ```
