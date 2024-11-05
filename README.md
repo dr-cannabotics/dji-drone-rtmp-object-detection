@@ -1,7 +1,3 @@
-Here’s a complete GitHub project description that includes all the components you mentioned, with additional clarity and structure for easier understanding:
-
----
-
 # Real-Time Object Detection from DJI Mini 3 Pro with DJI Goggles 2, RTMP Streaming, and OpenCV
 
 This project enables real-time object detection on a DJI Mini 3 Pro drone video feed, using **DJI Goggles 2**, **DJI Fly App**, **RTMP streaming**, and **OpenCV**. The setup involves streaming the video feed from **DJI Goggles 2** (connected to the drone) via a smartphone using the DJI Fly app, sending it to an **RTMP server**, and processing the stream with OpenCV for object detection.
