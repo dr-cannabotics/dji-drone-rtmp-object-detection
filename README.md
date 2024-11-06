@@ -1,4 +1,3 @@
-Sure! Here's the updated project description with the final line added:
 
 ---
 
