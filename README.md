@@ -3,7 +3,7 @@
 
 # Real-Time Object Detection with DJI Mini 3 Pro
 
-This project enables real-time object detection using a video feed from the DJI Mini 3 Pro drone and DJI Goggles 2. The video stream is relayed to a Node.js RTMP server, where OpenCV processes the feed for object detection.
+This project provides real-time object detection on live video from a DJI Mini 3 Pro drone using DJI Goggles 2, enabling immediate analysis of the drone’s surroundings. The video stream is relayed from the DJI Fly app to a Node.js RTMP server, where OpenCV processes the feed for object detection. With either a pre-trained or custom-trained model, the system can identify and highlight objects within the video in real time, making it suitable for applications like surveillance, wildlife monitoring, and other aerial object-detection tasks.
 
 ## Components
 
@@ -84,7 +84,7 @@ python opencv_detection.py
 
 ---
 
-## Training a Custom Object Detection Model
+## Optional: Training a Custom Object Detection Model
 
 If you want to detect specific objects, you can train a custom model. Here’s how:
 
