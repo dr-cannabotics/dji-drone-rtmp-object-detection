@@ -92,8 +92,6 @@ Install OpenCV:
 pip install opencv-python
 ```
 
-Download model files and place them in the project directory.
-
 Update the RTMP stream URL in `opencv_detection.py`:
 
 ```python
