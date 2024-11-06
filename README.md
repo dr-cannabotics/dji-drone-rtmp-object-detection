@@ -1,9 +1,9 @@
 
 ---
 
-# Real-Time Object Detection with DJI Mini 3 Pro
+# Real-Time Object Detection and Live Streaming with DJI Mini 3 Pro over RTMP
 
-This project provides real-time object detection on live video from a DJI Mini 3 Pro drone using DJI Goggles 2, enabling immediate analysis of the drone’s surroundings. The video stream is relayed from the DJI Fly app to a Node.js RTMP server, where OpenCV processes the feed for object detection. With either a pre-trained or custom-trained model, the system can identify and highlight objects within the video in real time, making it suitable for applications like surveillance, wildlife monitoring, and other aerial object-detection tasks.
+This project enables real-time object detection with live streaming from a DJI Mini 3 Pro drone using DJI Goggles 2, designed for applications that require immediate analysis of aerial footage. The video feed is streamed from the DJI Fly app to a Node.js RTMP server, where OpenCV processes each frame for object detection. Leveraging either pre-trained or custom-trained models, the system detects and highlights objects within the video feed in real time. This setup is ideal for applications in surveillance, environmental monitoring, and other scenarios where live aerial object detection and streaming are critical.
 
 ## Components
 
