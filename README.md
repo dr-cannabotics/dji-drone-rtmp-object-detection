@@ -1,4 +1,3 @@
-Here's an enhanced guide with information on training custom object detection models, including steps for data preparation, model training with TensorFlow, and integrating the custom model into your project.
 
 ---
 
