@@ -16,12 +16,12 @@ This project enables real-time object detection using the video feed from the DJ
 
 ```
 dji-drone-rtmp-object-detection/
-├── server.js                     # RTMP server configuration
-├── opencv_detection.py           # Object detection script
+├── server.js                                     # RTMP server configuration
+├── opencv_detection.py                           # Object detection script
 ├── ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt  # Model config
-├── frozen_inference_graph.pb     # Detection model
-├── labels.txt                    # COCO class labels
-└── README.md                     # Documentation
+├── frozen_inference_graph.pb                     # Detection model
+├── labels.txt                                    # COCO class labels
+└── README.md                                     # Documentation
 ```
 
 ## Setup Instructions
