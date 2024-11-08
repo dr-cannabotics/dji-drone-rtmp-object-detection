@@ -5,8 +5,6 @@
 
 This project enables real-time object detection on live video streams from a DJI Mini 3 Pro drone, utilizing DJI Goggles 2, an RTMP server, and OpenCV. Designed for applications requiring immediate analysis of aerial footage—such as surveillance and environmental monitoring—the system streams from the DJI Fly app to a Node.js RTMP server, where OpenCV processes each frame for object detection. The setup supports pre-trained models to detect and highlight objects within the video feed in real time.
 
-> **Forked from:** [zafarRehan/object_detection_COCO](https://github.com/zafarRehan/object_detection_COCO)
-
 ---
 
 ## Project Structure
