@@ -16,14 +16,14 @@ Forked out of -> https://github.com/zafarRehan/object_detection_COCO
 
 ```
 dji-drone-rtmp-object-detection/
-├── server.js                                     # RTMP server configuration
-├── opencv_detection_rtmp.py                      # Object detection rtmp script
-├── opencv_detection_image.py                     # Object detection image script
-├── opencv_detection_rtmp.py                      # Object detection video script
-├── ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt  # Model config
-├── frozen_inference_graph.pb                     # Detection model
-├── labels.txt                                    # COCO class labels
-└── README.md                                     # Documentation
+├── server.js                                      # RTMP server configuration
+├── opencv_detection_image.py                      # Object detection rtmp script
+├── opencv_detection_rtmp. py                      # Object detection image script
+├── opencv_detection_video.py                      # Object detection video script
+├── ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt   # Model config
+├── frozen_inference_graph.pb                      # Detection model
+├── labels.txt                                     # COCO class labels
+└── README.md                                      # Documentation
 ```
 
 ---
