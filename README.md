@@ -3,200 +3,143 @@
 
 # Real-Time Object Detection and Live Streaming with DJI Mini 3 Pro over RTMP
 
-This project enables real-time object detection with live streaming from a DJI Mini 3 Pro drone using DJI Goggles 2, designed for applications that require immediate analysis of aerial footage. The video feed is streamed from the DJI Fly app to a Node.js RTMP server, where OpenCV processes each frame for object detection. Leveraging either pre-trained or custom-trained models, the system detects and highlights objects within the video feed in real time. This setup is ideal for applications in surveillance, environmental monitoring, and other scenarios where live aerial object detection and streaming are critical.
-Forked out of -> https://github.com/zafarRehan/object_detection_COCO
-## Components
+This project enables real-time object detection on live video streams from a DJI Mini 3 Pro drone, utilizing DJI Goggles 2, an RTMP server, and OpenCV. Designed for applications requiring immediate analysis of aerial footage—such as surveillance and environmental monitoring—the system streams from the DJI Fly app to a Node.js RTMP server, where OpenCV processes each frame for object detection. The setup supports pre-trained models to detect and highlight objects within the video feed in real time.
 
-- **DJI Mini 3 Pro & DJI Goggles 2**: Capture and display video feed.
-- **Smartphone**: Streams video via the DJI Fly app to an RTMP server.
-- **Node.js RTMP Server**: Manages the video stream.
-- **OpenCV**: Processes video feed for object detection.
+> **Forked from:** [zafarRehan/object_detection_COCO](https://github.com/zafarRehan/object_detection_COCO)
+
+---
 
 ## Project Structure
 
 ```
 dji-drone-rtmp-object-detection/
 ├── server.js                                      # RTMP server configuration
-├── opencv_detection_image.py                      # Object detection rtmp script
-├── opencv_detection_rtmp.py                       # Object detection image script
-├── opencv_detection_video.py                      # Object detection video script
-├── opencv_detection_webcam.py                     # Object detection webcam script
-├── ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt   # Model config
-├── frozen_inference_graph.pb                      # Detection model
+├── opencv_detection_image.py                      # Object detection script for images (independent)
+├── opencv_detection_rtmp.py                       # Object detection script for RTMP stream
+├── opencv_detection_video.py                      # Object detection script for video files (independent)
+├── opencv_detection_webcam.py                     # Object detection script for webcam input (independent)
+├── ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt   # Model configuration for SSD MobileNet
+├── frozen_inference_graph.pb                      # Pre-trained object detection model
 ├── labels.txt                                     # COCO class labels
 └── README.md                                      # Documentation
 ```
 
 ---
 
-## Setup Instructions
+## Components
 
-### 1. Install Node.js and RTMP Server
+- **DJI Mini 3 Pro & DJI Goggles 2**: Capture and display the video feed.
+- **Smartphone**: Streams video via the DJI Fly app to an RTMP server.
+- **Node.js RTMP Server**: Manages the video stream.
+- **OpenCV**: Processes video frames for object detection.
 
-1. **Install Node.js**: Check versions to confirm the installation.
-   ```bash
-   node -v
-   npm -v
-   ```
+## Features
 
-2. **Clone Repository and Install Dependencies**
+- **Real-Time Detection**: Processes video frames with OpenCV in real time, detecting objects based on COCO classes.
+- **Low-Latency Streaming**: Streams live video from the DJI Fly app to a local RTMP server, viewable on VLC or similar clients.
+- **Independent Detection Scripts**: `opencv_detection_image.py`, `opencv_detection_video.py`, and `opencv_detection_webcam.py` can run independently for detecting objects in images, video files, or webcam feeds, without requiring the RTMP server.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+1. **Node.js**: Ensure Node.js is installed.
+2. **Python 3.x**: Set up Python and install OpenCV for object detection.
+3. **DJI Fly App**: Use the DJI Fly app on a smartphone to configure video streaming.
+
+### Installation
+
+1. **Clone the Repository**:
    ```bash
    git clone https://github.com/dr-cannabotics/dji-drone-rtmp-object-detection/
    cd dji-drone-rtmp-object-detection
-   npm install node-media-server
    ```
 
-3. **Start RTMP Server**
-   ```bash
-   node server.js
-   ```
-   The server will start listening at `rtmp://127.0.0.1:1935/live`.
-
-### 2. Stream Video to RTMP Server
-
-1. Connect DJI Goggles 2 to the drone and smartphone.
-2. In the DJI Fly app, configure the stream to `rtmp://127.0.0.1:1935/live`.
-
-### 3. Verify RTMP Stream with VLC
-
-1. Open VLC and go to **Media > Open Network Stream**.
-2. Enter the stream URL: `rtmp://127.0.0.1:1935/live`.
-3. Click **Play** to confirm the live video feed is working.
-
-### 4. Set Up OpenCV for Object Detection
-
-#### Using a Python Virtual Environment (recommended)
-
-```bash
-python3 -m venv ~/myenv
-source ~/myenv/bin/activate
-pip install opencv-python
-```
-
-In `opencv_detection.py`, update the video capture source to the RTMP stream:
-
-```python
-cap = cv2.VideoCapture('rtmp://127.0.0.1:1935/live')
-```
-
-Run the detection script:
-
-```bash
-python opencv_detection.py
-```
-
----
-
-## Optional: Training a Custom Object Detection Model
-
-If you want to detect specific objects, you can train a custom model. Here’s how:
-
-### 1. Data Collection and Annotation
-
-1. **Collect Images**: Gather images of the objects you want to detect. Aim for a diverse set of images with various backgrounds and lighting conditions.
-2. **Annotate Images**: Use tools like [LabelImg](https://github.com/tzutalin/labelImg) or [Roboflow](https://roboflow.com/) to label objects in each image. Save annotations in **Pascal VOC XML** or **COCO JSON** format, as required by your training pipeline.
-
-### 2. Set Up the Training Environment
-
-1. **Install TensorFlow**: For object detection, use TensorFlow 2.x.
-   ```bash
-   pip install tensorflow
-   ```
-
-2. **Install TensorFlow Object Detection API**:
-   - Clone the TensorFlow models repository:
+2. **Set Up RTMP Server**:
+   - Install dependencies:
      ```bash
-     git clone https://github.com/tensorflow/models.git
+     npm install node-media-server
      ```
-   - Install the Object Detection API and its dependencies:
+   - Start the RTMP server:
      ```bash
-     cd models/research
-     protoc object_detection/protos/*.proto --python_out=.
-     pip install .
+     node server.js
+     ```
+     The server listens on `rtmp://127.0.0.1:1935/live`.
+
+3. **Configure DJI Fly App for RTMP Streaming**:
+   - Connect DJI Goggles 2 to the drone and smartphone.
+   - Configure the stream in DJI Fly app to `rtmp://127.0.0.1:1935/live`.
+
+4. **Verify RTMP Stream (Optional)**:
+   - Open VLC, navigate to **Media > Open Network Stream**.
+   - Enter the RTMP URL: `rtmp://127.0.0.1:1935/live`.
+   - Click **Play** to confirm the live video feed is working.
+
+5. **Install OpenCV in Python**:
+   - Set up a virtual environment (optional):
+     ```bash
+     python3 -m venv ~/myenv
+     source ~/myenv/bin/activate
+     ```
+   - Install OpenCV:
+     ```bash
+     pip install opencv-python
      ```
 
-### 3. Prepare the Dataset
-
-Convert your dataset to TFRecord format, which is required for training in TensorFlow.
-
-1. **Convert Annotations**:
-   Use a script (like `xml_to_tfrecord.py` for VOC or `json_to_tfrecord.py` for COCO) to generate `.tfrecord` files.
-
-2. **Update `label_map.pbtxt`**:
-   Define your class labels in `label_map.pbtxt`:
-   ```text
-   item {
-     id: 1
-     name: 'object_name'
-   }
-   ```
-   Repeat for each object you want to detect.
-
-### 4. Configure Model for Training
-
-1. Choose a pre-trained model from TensorFlow's [Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) (e.g., SSD MobileNet V3).
-2. Download the model and configuration file, then modify the configuration to point to your dataset, `label_map.pbtxt`, and adjust other parameters (e.g., batch size, learning rate).
-
-### 5. Train the Model
-
-Run the training script with your configuration file:
-
-```bash
-python models/research/object_detection/model_main_tf2.py \
-    --pipeline_config_path=path/to/pipeline.config \
-    --model_dir=path/to/output \
-    --alsologtostderr
-```
-
-Monitor the training process, and when it reaches a satisfactory accuracy, export the model:
-
-```bash
-python models/research/object_detection/exporter_main_v2.py \
-    --input_type image_tensor \
-    --pipeline_config_path path/to/pipeline.config \
-    --trained_checkpoint_dir path/to/output/checkpoint \
-    --output_directory path/to/exported_model
-```
-
-### 6. Integrate the Custom Model
-
-1. Replace `frozen_inference_graph.pb` and `ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt` with the new model files.
-2. Update `opencv_detection.py` to load your custom model:
-
-   ```python
-   net = cv2.dnn.readNet('path/to/exported_model/frozen_inference_graph.pb', 
-                         'path/to/exported_model/label_map.pbtxt')
-   ```
-
 ---
 
-## Usage
+## Running the Python Detection Scripts
 
-1. **Start the RTMP Server**
+The following scripts are included in the project and can be run independently for different video sources. Only `opencv_detection_rtmp.py` requires the RTMP server; the others do not.
+
+### 1. **Detect Objects in RTMP Stream**
+
+   For detecting objects on a live RTMP stream from the DJI drone:
    ```bash
-   node server.js
+   python opencv_detection_rtmp.py
    ```
+   *Note*: Ensure the DJI Fly app is streaming to `rtmp://127.0.0.1:1935/live`, as configured above.
 
-2. **Stream Video from DJI Goggles 2**
-   - Set up the stream in DJI Fly app.
-   - Verify the RTMP stream in VLC (see instructions above).
+### 2. **Detect Objects in an Image**
 
-3. **Run the OpenCV Script for Object Detection**
+   For detecting objects in a single image file:
+   - Place your target image in the project folder or specify its path in the script.
+   - Open `opencv_detection_image.py` and update the image path:
+     ```python
+     img = cv2.imread('test_image.png')  # Specify the path to your image file
+     ```
+   - Run the script:
+     ```bash
+     python opencv_detection_image.py
+     ```
+   *Note*: This script runs independently and does not require the RTMP server.
+
+### 3. **Detect Objects in a Video File**
+
+   For detecting objects in a video file:
+   - Place your target video file in the project folder or specify its path in the script.
+   - Open `opencv_detection_video.py` and update the video file path:
+     ```python
+     cap = cv2.VideoCapture('test_video.mp4')  # Specify the path to your video file
+     ```
+   - Run the script:
+     ```bash
+     python opencv_detection_video.py
+     ```
+   *Note*: This script runs independently and does not require the RTMP server.
+
+### 4. **Detect Objects via Webcam**
+
+   For real-time object detection using your computer’s webcam:
    ```bash
-   python opencv_detection.py
+   python opencv_detection_webcam.py
    ```
-
-You should see object detection in action on the video feed.
-
----
-
-## Tips and Troubleshooting
-
-- **Network Setup**: Ensure both your smartphone and server are connected to the same Wi-Fi network for stable streaming.
-- **RTMP Configuration**: Adjust `server.js` settings (e.g., buffer size) for optimized performance if needed.
-- **Confidence Thresholds**: Fine-tune detection thresholds in `opencv_detection.py` to balance detection accuracy and performance.
+   *Note*: This script runs independently and does not require the RTMP server.
 
 ---
-
 
 Happy flying, hacking, and object-detecting! 🛸
+
+---
