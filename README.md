@@ -84,6 +84,9 @@ dji-drone-rtmp-object-detection/
    - Install OpenCV:
      ```bash
      pip install opencv-python
+     sudo apt update
+     sudo apt install python3-tk
+
      ```
 
 ---
