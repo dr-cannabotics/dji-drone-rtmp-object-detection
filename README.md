@@ -86,6 +86,7 @@ dji-drone-rtmp-object-detection/
      pip install opencv-python
      sudo apt update
      sudo apt install python3-tk
+     pip install pytube
 
      ```
 
