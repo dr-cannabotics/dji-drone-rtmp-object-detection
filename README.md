@@ -16,6 +16,7 @@ dji-drone-rtmp-object-detection/
 ├── opencv_detection_rtmp.py                       # Object detection script for RTMP stream
 ├── opencv_detection_video.py                      # Object detection script for video files (independent)
 ├── opencv_detection_webcam.py                     # Object detection script for webcam input (independent)
+├── opencv_detection_youtube.py                    # Object detection script for youtube video (independent)
 ├── ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt   # Model configuration for SSD MobileNet
 ├── frozen_inference_graph.pb                      # Pre-trained object detection model
 ├── labels.txt                                     # COCO class labels
